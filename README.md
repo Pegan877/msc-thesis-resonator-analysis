@@ -43,10 +43,25 @@ msc-thesis-resonator-analysis/
 
 ### `Data/`
 
-Raw and pre-processed VNA measurements, one subfolder per sweep.
+Raw and pre-processed VNA measurements, one subfolder per sweep. Resonator assignment and roles (from `CONFIG` in `resonator_analysis_covonly.ipynb`):
 
-- **`pwr_sweep_*`** — single-tone S21 traces taken across a range of input powers, used to extract the power dependence of Q<sub>i</sub>. Folders suffixed `(res 1)` / `(res2)` indicate which resonator the sweep belongs to; `low` folders extend the sweep down into the single-photon regime.
-- **`time_sweep_*`** — repeated S21 traces taken at *fixed* power over time. These quantify TLS-induced temporal fluctuations in the fitted Q<sub>i</sub>, independent of fit-covariance noise.
+| Folder | Resonator | Tier | Atten | Role |
+|---|---|---|---|---|
+| `pwr_sweep_013 (res 1)` | Resonator 1 (f<sub>c</sub> ≈ 6.901285 GHz) | `m30_bw100` | −30 dB | Main power sweep |
+| `pwr_sweep_021 (res1 low)` | Resonator 1 | `m30_bw10` | −30 dB | Low-power extension |
+| `pwr_sweep_047` | Resonator 1 | `m70` | −70 dB | Very-low-power tier |
+| `pwr_sweep_048` | Resonator 1 | `m70` | −70 dB | Very-low-power tier |
+| `pwr_sweep_049` | Resonator 1 | `m70` | −70 dB | Very-low-power tier |
+| `pwr_sweep_014 (res2)` | Resonator 2 (f<sub>c</sub> ≈ 6.718 GHz) | `m30_bw100` | −30 dB | Main power sweep |
+| `pwr_sweep_029 (res2 low)` | Resonator 2 | `m30_bw10` | −30 dB | Low-power extension |
+| `pwr_sweep_044` | Resonator 2 | `m70` | −70 dB | Very-low-power tier |
+| `pwr_sweep_045` | Resonator 2 | `m70` | −70 dB | Very-low-power tier |
+| `pwr_sweep_046` | Resonator 2 | `m70` | −70 dB | Very-low-power tier |
+| `time_sweep_001` | Resonator 2 | — | −70 dB (assumed) | Repeated fixed-power scans, +3 dBm VNA output |
+| `time_sweep_003` | Resonator 2 | — | −70 dB (assumed) | Repeated fixed-power scans, +10 dBm VNA output |
+
+- **`pwr_sweep_*`** — single-tone S21 traces taken across a range of input powers, used to extract the power dependence of Q<sub>i</sub>. The `tier` (`m30_bw100` / `m30_bw10` / `m70`) encodes the manual attenuator setting and VNA IF bandwidth for that sweep.
+- **`time_sweep_*`** — repeated S21 traces taken at *fixed* power over time, on Resonator 2 only. These quantify TLS-induced temporal fluctuations in the fitted Q<sub>i</sub>, independent of fit-covariance noise, and the resulting fluctuation-vs-power scaling law is applied to Resonator 1 as a proxy (it has no time sweeps of its own). Note `time_sweep_002` exists on disk but is excluded from the analysis — it was taken while the system was still settling after the power step.
 
 ### `code/data-analysis/`
 
