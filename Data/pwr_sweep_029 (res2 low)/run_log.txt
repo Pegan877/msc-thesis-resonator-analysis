@@ -1,0 +1,3 @@
+[OK] req=-55.0 dBm -> set=-55.0 dBm, avg=100
+[OK] req=-47.5 dBm -> set=-47.5 dBm, avg=100
+[OK] req=-40.0 dBm -> set=-40.0 dBm, avg=100
